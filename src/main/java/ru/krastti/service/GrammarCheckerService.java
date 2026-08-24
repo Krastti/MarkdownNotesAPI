@@ -26,7 +26,7 @@ public class GrammarCheckerService {
         try {
             response = grammarCheckerClient.grammarCheck(note.text(), language);
         } catch (RestClientException e) {
-            throw new GrammarCheckException("Grammar check service is unavailable.");
+            throw new GrammarCheckException("Grammar check service is unavailable.", e);
         }
 
         List<GrammarIssue> issues = response.getMatches().stream()
