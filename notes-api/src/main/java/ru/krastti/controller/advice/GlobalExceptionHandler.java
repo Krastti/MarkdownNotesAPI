@@ -5,9 +5,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import ru.krastti.exception.GrammarCheckException;
+import ru.krastti.exception.MarkdownRenderException;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<String> handleIllegalArgumentException(IllegalArgumentException e) {
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(e.getMessage());
+    }
 
     @ExceptionHandler(GrammarCheckException.class)
     public ResponseEntity<String> handleGrammarCheckException(GrammarCheckException e) {
@@ -16,10 +24,10 @@ public class GlobalExceptionHandler {
                 .body(e.getMessage());
     }
 
-    @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<String> handleIllegalArgumentException(IllegalArgumentException e) {
+    @ExceptionHandler(MarkdownRenderException.class)
+    public ResponseEntity<String> handleMarkdownRenderException(MarkdownRenderException e) {
         return ResponseEntity
-                .status(HttpStatus.NOT_FOUND)
+                .status(HttpStatus.SERVICE_UNAVAILABLE)
                 .body(e.getMessage());
     }
 }

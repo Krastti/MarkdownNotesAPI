@@ -1,6 +1,6 @@
 package ru.krastti.client;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
@@ -12,8 +12,8 @@ import ru.krastti.entity.dto.responce.LanguageToolResponse;
 public class GrammarCheckerClient {
     private final RestClient restClient;
 
-    @Autowired
-    public GrammarCheckerClient(RestClient restClient) {
+    public GrammarCheckerClient(
+            @Qualifier("languageToolServiceRestClient") RestClient restClient) {
         this.restClient = restClient;
     }
 

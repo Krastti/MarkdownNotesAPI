@@ -8,13 +8,19 @@ import org.springframework.web.client.RestClient;
 @Configuration
 public class RestClientConfig {
 
-    @Value("${language-tool.client.base-url}")
-    private String baseUrl;
-
-    @Bean
-    public RestClient languageToolServiceRestClient() {
+    @Bean("languageToolServiceRestClient")
+    public RestClient languageToolServiceRestClient(
+            @Value("${language-tool.client.base-url}") String languageToolBaseUrl) {
         return RestClient.builder()
-                .baseUrl(baseUrl)
+                .baseUrl(languageToolBaseUrl)
+                .build();
+    }
+
+    @Bean("markdownRendererServiceRestClient")
+    public RestClient markdownRendererServiceRestClient(
+            @Value("${markdown-renderer.client.base-url}") String markdownRendererBaseUrl) {
+        return RestClient.builder()
+                .baseUrl(markdownRendererBaseUrl)
                 .build();
     }
 }

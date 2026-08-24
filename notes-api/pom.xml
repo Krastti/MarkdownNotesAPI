@@ -17,21 +17,8 @@
     <description>Notes REST API module</description>
 
     <properties>
-        <java.version>21</java.version>
         <springboot4-dotenv.version>5.1.0</springboot4-dotenv.version>
     </properties>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>me.paulschwarz</groupId>
-                <artifactId>springboot4-dotenv</artifactId>
-                <version>${springboot4-dotenv.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 
     <dependencies>
         <!-- WEB -->
