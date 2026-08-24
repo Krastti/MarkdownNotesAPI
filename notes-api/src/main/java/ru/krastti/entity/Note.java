@@ -72,5 +72,5 @@ public class Note {
 
     public NoteDTO toDto() {
         return new NoteDTO(id, title, text, creationTime.toLocalDate());
-    };
+    }
 }
