@@ -18,10 +18,10 @@ public class GrammarCheckerClient {
         this.restClient = restClient;
     }
 
-    public LanguageToolResponse grammarCheck(NoteDTO note) {
+    public LanguageToolResponse grammarCheck(String text, String language) {
         MultiValueMap<String, String> formData = new LinkedMultiValueMap<>(); // TODO Добавить сериализацию DTO класса
-        formData.add("text", note.text());
-        formData.add("language", "ru-RU"); // TODO Сделать настраиваемым
+        formData.add("text", text);
+        formData.add("language", language);
 
         return restClient.post()
                 .uri("/v2/check")
