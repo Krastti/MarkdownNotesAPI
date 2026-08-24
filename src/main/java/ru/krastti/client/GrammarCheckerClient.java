@@ -19,7 +19,7 @@ public class GrammarCheckerClient {
     }
 
     public LanguageToolResponse grammarCheck(String text, String language) {
-        MultiValueMap<String, String> formData = new LinkedMultiValueMap<>(); // TODO Добавить сериализацию DTO класса
+        MultiValueMap<String, String> formData = new LinkedMultiValueMap<>();
         formData.add("text", text);
         formData.add("language", language);
 
