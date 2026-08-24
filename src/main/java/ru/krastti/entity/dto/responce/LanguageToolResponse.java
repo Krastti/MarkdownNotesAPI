@@ -2,6 +2,7 @@ package ru.krastti.entity.dto.responce;
 
 import java.util.List;
 
+@SuppressWarnings("unused")
 public class LanguageToolResponse {
     private Language language;
     private List<Match> matches;
