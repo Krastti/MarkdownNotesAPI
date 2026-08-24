@@ -25,7 +25,7 @@ public class NoteController {
 
     @GetMapping("/notes/{id}")
     public NoteDTO findById(@PathVariable int id) {
-        return null;
+        return noteService.findById(id);
     }
 
     @PostMapping("/notes")

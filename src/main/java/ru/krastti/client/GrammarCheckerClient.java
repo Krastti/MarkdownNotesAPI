@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestClient;
-import ru.krastti.entity.dto.NoteDTO;
 import ru.krastti.entity.dto.responce.LanguageToolResponse;
 
 @Component

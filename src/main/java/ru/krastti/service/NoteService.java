@@ -24,6 +24,12 @@ public class NoteService {
         this.noteRepository = noteRepository;
     }
 
+    public NoteDTO findById(int id) {
+        return noteRepository.findById(id)
+                .map(Note::toDto)
+                .orElseThrow(() -> new IllegalArgumentException("Note with " + id + " not found"));
+    }
+
     public NotesContainerDto findAll() {
         List<NoteDTO> notes = noteRepository.findAll().stream()
                 .map(Note::toDto).collect(Collectors.toList());
