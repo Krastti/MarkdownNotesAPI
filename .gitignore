@@ -1,5 +1,6 @@
 HELP.md
 notes-api/.env
+notes-api/src/main/resources/application.properties
 target/
 .mvn/wrapper/maven-wrapper.jar
 .mvn
