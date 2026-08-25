@@ -1,0 +1,55 @@
+services:
+
+  languagetool:
+    image: erikvl87/languagetool
+    ports:
+      - "${LANGUAGETOOL_PORT:-8010}:8010"
+
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "${DB_PORT:-5432}:5432"
+
+  markdown-renderer-service:
+    build:
+      context: .
+      dockerfile: markdown-renderer-service/Dockerfile
+    ports:
+      - "${MARKDOWN_RENDERER_PORT:-8020}:8020"
+
+  notes-api:
+    build:
+      context: .
+      dockerfile: notes-api/Dockerfile
+    ports:
+      - "${NOTES_API_PORT:-8080}:8080"
+    environment:
+      DB_URL: jdbc:postgresql://postgres:5432/${DB_NAME}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      LANGUAGE_TOOL_CLIENT_BASE_URL: http://languagetool:8010
+      MARKDOWN_RENDERER_CLIENT_BASE_URL: http://markdown-renderer-service:8020
+    depends_on:
+      - postgres
+      - languagetool
+      - markdown-renderer-service
+
+  frontend-service:
+    build:
+      context: .
+      dockerfile: frontend-service/Dockerfile
+    ports:
+      - "${FRONTEND_PORT:-8030}:8030"
+    environment:
+      NOTES_API_CLIENT_BASE_URL: http://notes-api:8080
+    depends_on:
+      - notes-api
+
+volumes:
+  postgres_data:
