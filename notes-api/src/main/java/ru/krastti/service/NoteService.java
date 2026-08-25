@@ -3,13 +3,18 @@ package ru.krastti.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 import ru.krastti.entity.Note;
 import ru.krastti.entity.dto.NoteDTO;
 import ru.krastti.entity.dto.NotesContainerDto;
 import ru.krastti.entity.dto.request.CreateNoteRequest;
 import ru.krastti.entity.dto.request.UpdateNoteRequest;
+import ru.krastti.exception.FileUploadException;
+import ru.krastti.exception.InvalidFileException;
 import ru.krastti.repository.NoteRepository;
 
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -38,6 +43,33 @@ public class NoteService {
     public NoteDTO save(CreateNoteRequest request) {
         Note note = request.toEntity();
         return noteRepository.save(note).toDto();
+    }
+
+    public NoteDTO uploadNote(MultipartFile file, String title) {
+        if (file.isEmpty()) {
+            throw new InvalidFileException("Uploaded file is empty");
+        }
+
+        String filename = file.getOriginalFilename();
+        if (filename != null && !isValidMarkdownExtension(filename)) {
+            throw new InvalidFileException("File must have .md or .markdown extension");
+        }
+
+        String text;
+        try {
+            byte[] bytes = file.getBytes();
+            text = new String(bytes, StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            throw new FileUploadException("Failed to read uploaded file", e);
+        }
+
+        CreateNoteRequest request = new CreateNoteRequest(title, text);
+        return save(request);
+    }
+
+    private boolean isValidMarkdownExtension(String filename) {
+        String lowerFilename = filename.toLowerCase();
+        return lowerFilename.endsWith(".md") || lowerFilename.endsWith(".markdown");
     }
 
     public NoteDTO update(int id, UpdateNoteRequest request) {
