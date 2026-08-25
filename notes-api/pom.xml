@@ -37,13 +37,6 @@
             <artifactId>postgresql</artifactId>
             <scope>runtime</scope>
         </dependency>
-
-        <!-- From .env -->
-        <dependency>
-            <groupId>me.paulschwarz</groupId>
-            <artifactId>springboot4-dotenv</artifactId>
-            <version>${springboot4-dotenv.version}</version>
-        </dependency>
     </dependencies>
 
     <build>

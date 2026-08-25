@@ -6,13 +6,13 @@ services:
       - "${LANGUAGETOOL_PORT:-8010}:8010"
 
   postgres:
-    image: postgres:16
+    image: postgres:18
     environment:
       POSTGRES_DB: ${DB_NAME}
       POSTGRES_USER: ${DB_USERNAME}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql
     ports:
       - "${DB_PORT:-5432}:5432"
 
