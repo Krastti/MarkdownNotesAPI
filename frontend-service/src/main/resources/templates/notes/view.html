@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${note.title}">Название заметки</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<header class="app-header">
+    <h1 th:text="${note.title}">Название заметки</h1>
+    <p class="subtitle"
+       th:text="${#temporals.format(note.creationTime, 'dd.MM.yyyy')}">01.01.2024</p>
+</header>
+
+<main class="container">
+    <div>
+        <a th:href="@{/notes}" class="btn btn-secondary">← Назад к списку</a>
+    </div>
+
+    <article class="note-card" style="margin-top: 24px;">
+        <div class="note-text" th:utext="${renderedHtml}">
+            <p>Отрендеренное содержимое заметки появится здесь.</p>
+        </div>
+    </article>
+
+    <div style="margin-top: 24px; display: flex; gap: 12px; align-items: center;">
+        <a th:href="@{/notes/{id}/edit(id=${note.id})}" class="btn">Редактировать</a>
+
+        <form th:action="@{/notes/{id}/delete(id=${note.id})}" method="post"
+              onsubmit="return confirm('Удалить эту заметку?');" style="display: inline;">
+            <button type="submit" class="btn btn-danger">Удалить</button>
+        </form>
+    </div>
+</main>
+</body>
+</html>

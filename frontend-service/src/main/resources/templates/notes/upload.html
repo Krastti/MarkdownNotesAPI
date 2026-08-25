@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Загрузить файл</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<header class="app-header">
+    <h1>Загрузить заметку из файла</h1>
+</header>
+
+<main class="container">
+    <form th:action="@{/notes/upload}" method="post" enctype="multipart/form-data" class="form-group">
+        <div>
+            <label for="title">Заголовок заметки</label>
+            <input id="title" type="text" name="title" required>
+        </div>
+
+        <div>
+            <label for="file">Markdown-файл</label>
+            <input id="file" type="file" name="file" accept=".md,.markdown" required>
+            <small style="color: #6b7280; display: block; margin-top: 4px;">
+                Поддерживаемые форматы: .md, .markdown
+            </small>
+        </div>
+
+        <div>
+            <button type="submit" class="btn">Загрузить</button>
+            <a th:href="@{/notes}" class="btn btn-secondary">Отмена</a>
+        </div>
+    </form>
+</main>
+</body>
+</html>

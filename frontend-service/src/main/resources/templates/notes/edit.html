@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактировать заметку</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<header class="app-header">
+    <h1>Редактировать заметку</h1>
+    <p class="subtitle" th:text="${note.title}">Название</p>
+</header>
+
+<main class="container">
+    <form th:action="@{/notes/{id}/edit(id=${note.id})}" method="post" th:object="${request}" class="form-group">
+        <div>
+            <label for="title">Заголовок</label>
+            <input id="title" type="text" th:field="*{title}" required>
+        </div>
+
+        <div>
+            <label for="text">Содержимое (Markdown)</label>
+            <textarea id="text" rows="15" required><th:block th:text="*{text}"></th:block></textarea>
+        </div>
+
+        <div>
+            <button type="submit" class="btn">Сохранить</button>
+            <a th:href="@{/notes/{id}(id=${note.id})}" class="btn btn-secondary">Отмена</a>
+        </div>
+    </form>
+</main>
+</body>
+</html>

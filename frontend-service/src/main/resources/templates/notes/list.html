@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Notes App — Список заметок</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<header class="app-header">
+    <h1>Notes App</h1>
+    <p class="subtitle">Список заметок</p>
+</header>
+
+<main class="container">
+    <div>
+        <div>
+            <a th:href="@{/notes/new}" class="btn">Создать заметку</a>
+            <a th:href="@{/notes/upload}" class="btn btn-secondary">Загрузить файл</a>
+        </div>
+    </div>
+
+    <div th:if="${#lists.isEmpty(notes)}" style="margin-top: 24px;">
+        <p>Заметок пока нет</p>
+    </div>
+
+    <section th:unless="${#lists.isEmpty(notes)}" class="note-list">
+        <article th:each="note : ${notes}" class="note-card">
+            <h3 class="note-title">
+                <a th:href="@{/notes/{id}(id=${note.id})}"
+                   th:text="${note.title}">Название заметки</a>
+            </h3>
+            <p th:text="${#temporals.format(note.creationTime, 'dd.MM.yyyy')}">01.01.2024</p>
+            <p class="note-text"
+               th:text="${#strings.abbreviate(note.text, 100)}">Краткое содержание заметки...</p>
+        </article>
+    </section>
+</main>
+</body>
+</html>
