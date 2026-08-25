@@ -28,6 +28,7 @@
 	<modules>
 		<module>notes-api</module>
 		<module>markdown-renderer-service</module>
+		<module>frontend-service</module>
 	</modules>
 
 </project>
