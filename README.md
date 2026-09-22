@@ -10,6 +10,8 @@
 
 **Проект с roadmap.sh:** [https://github.com/Krastti/MarkdownNotesAPI](https://roadmap.sh/projects/markdown-note-taking-app)
 
+**Upvote project** https://roadmap.sh/projects/markdown-note-taking-app/solutions?u=687ac97ed8402b4cbd40d2df
+
 Pet-проект для заметок: загрузка markdown-файлов, проверка грамматики (LanguageTool),
 хранение заметок и рендер их в HTML (flexmark-java). Состоит из трёх Spring Boot
 сервисов, разворачивается через Docker Compose.
@@ -92,6 +94,8 @@ docker compose down -v
 # Notes REST Service
 
 **Project repository:** [https://github.com/Krastti/MarkdownNotesAPI](https://roadmap.sh/projects/markdown-note-taking-app)
+
+**Upvote project** https://roadmap.sh/projects/markdown-note-taking-app/solutions?u=687ac97ed8402b4cbd40d2df
 
 A pet project for notes: uploading markdown files, grammar checking (LanguageTool),
 storing notes and rendering them to HTML (flexmark-java). Consists of three Spring Boot
